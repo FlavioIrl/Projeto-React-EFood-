@@ -2,6 +2,7 @@ import { createGlobalStyle } from 'styled-components'
 
 export const cores = {
   BrancoAmarelado: '#FFF8F2',
+  branco: '#fff',
   salmao: '#E66767',
   preta: '#111'
 }
@@ -16,7 +17,7 @@ export const GlobalCss = createGlobalStyle`
   }
 
   body {
-    background-color: ${cores.BrancoAmarelado}; 
+    background-color: ${cores.BrancoAmarelado};
     color: ${cores.salmao};
   }
 

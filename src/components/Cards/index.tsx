@@ -6,7 +6,10 @@ import {
   Evaluation,
   InfoTop,
   CardsContainer,
-  Infos
+  Infos,
+  Description,
+  ButtonCard,
+  Nota
 } from './styles'
 
 const Cards = () => (
@@ -16,17 +19,17 @@ const Cards = () => (
       <InfoTop>
         <h3>Hioki Suchi</h3>
         <Evaluation>
-          <p>4.9</p>
+          <Nota>4.9</Nota>
           <Icon className="fa-solid fa-star" />
         </Evaluation>
       </InfoTop>
-      <p>
-        A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você!
-        Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis, tudo
-        no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor
-        inesquecível. Peça já!
-      </p>
-      <button>Saiba mais</button>
+      <Description>
+        Peça já o melhor da culinária japonesa no conforto da sua casa! Sushis
+        frescos, sashimis deliciosos e pratos quentes irresistíveis. Entrega
+        rápida, embalagens cuidadosas e qualidade garantida. <br />
+        Experimente o Japão sem sair do lar com nosso delivery!
+      </Description>
+      <ButtonCard>Saiba mais</ButtonCard>
     </Infos>
   </CardsContainer>
 )
