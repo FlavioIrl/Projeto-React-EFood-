@@ -1,10 +1,10 @@
 import Banner from '../Banner'
-import Comida from '../Comida'
+import Cards from '../Cards'
 
 const Home = () => (
   <>
     <Banner />
-    <Comida />
+    <Cards />
   </>
 )
 
