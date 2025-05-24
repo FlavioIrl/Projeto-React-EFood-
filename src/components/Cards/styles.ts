@@ -24,12 +24,13 @@ export const Infos = styled.div`
   border: 1px solid ${cores.salmao};
   border-top: none;
   background-color: ${cores.branco};
+  padding-bottom: 17px;
 `
 
 export const CardsContainer = styled.div`
   max-width: 472px;
-  margin: 40px;
   position: relative;
+  margin-top: 40px;
 
   ${TagContainer} {
     margin-right: 8px;

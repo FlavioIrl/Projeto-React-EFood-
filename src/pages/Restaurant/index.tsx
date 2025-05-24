@@ -1,7 +1,7 @@
 import CardsList from '../../components/CardsList'
-import Banner from '../../components/Banner'
 import Hioki from '../../assets/images/HiokiSushi.png'
 import Food from '../../models/Food'
+import HeaderRestaurant from '../../components/HeaderRestaurant'
 
 const dishes: Food[] = [
   {
@@ -18,7 +18,11 @@ const dishes: Food[] = [
 
 const Restaurant = () => (
   <>
-    <Banner />
+    <HeaderRestaurant
+      title={dishes[0].title}
+      category={dishes[0].category}
+      image={dishes[0].image}
+    />
     <CardsList foods={dishes} />
   </>
 )
