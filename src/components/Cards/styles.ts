@@ -1,11 +1,18 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
+import { TagContainer } from '../Tag/styles'
 
 export const Icon = styled.i`
   color: gold;
   font-size: 24px;
   padding: 1px;
   margin-left: 8px;
+`
+
+export const InfoTags = styled.div`
+  position: absolute;
+  top: 16px;
+  right: 16px;
 `
 
 export const Nota = styled.p`
@@ -23,16 +30,10 @@ export const CardsContainer = styled.div`
   max-width: 472px;
   margin: 40px;
   position: relative;
-`
 
-export const ButtonCard = styled.button`
-  margin: 8px;
-  border: none;
-  font-size: 16px;
-  font-height: bold;
-  color: ${cores.branco};
-  background-color: ${cores.salmao};
-  padding: 6px 8px;
+  ${TagContainer} {
+    margin-right: 8px;
+  }
 `
 
 export const InfoTop = styled.div`

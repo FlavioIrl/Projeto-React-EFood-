@@ -1,16 +1,26 @@
 import Cards from '../Cards'
 import { Container, List } from './styles'
+import Food from '../../models/Food'
 
-const CardsList = () => (
+export type Props = {
+  foods: Food[]
+}
+
+const CardsList = ({ foods }: Props) => (
   <Container>
     <div className="container">
       <List>
-        <Cards />
-        <Cards />
-        <Cards />
-        <Cards />
-        <Cards />
-        <Cards />
+        {foods.map((food) => (
+          <Cards
+            key={food.id}
+            title={food.title}
+            category={food.category}
+            description={food.description}
+            rating={food.rating}
+            highlight={food.highlight}
+            image={food.image}
+          />
+        ))}
       </List>
     </div>
   </Container>
