@@ -19,11 +19,7 @@ const Footer = () => (
       >
         <i className="fab fa-facebook-f" />
       </Icons>
-      <Icons
-        href="https://x.com"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+      <Icons href="https://x.com" target="_blank" rel="noopener noreferrer">
         <i className="fab fa-twitter" />
       </Icons>
     </ContainerIcons>
