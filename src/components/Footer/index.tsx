@@ -20,7 +20,7 @@ const Footer = () => (
         <i className="fab fa-facebook-f" />
       </Icons>
       <Icons
-        href="https://twitter.com"
+        href="https://x.com"
         target="_blank"
         rel="noopener noreferrer"
       >
