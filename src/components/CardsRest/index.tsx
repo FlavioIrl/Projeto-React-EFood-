@@ -1,4 +1,5 @@
-import { Image, CardsRestContainer } from './styles'
+import Button from '../Button'
+import { Image, CardsRestContainer, Title, Description } from './styles'
 
 type Props = {
   description: string
@@ -9,8 +10,11 @@ type Props = {
 const CardsRest = ({ description, image, title }: Props) => (
   <CardsRestContainer>
     <Image src={image} />
-    <h1>{title}</h1>
-    <p>{description}</p>
+    <Title>{title}</Title>
+    <Description>{description}</Description>
+    <Button type={'button'} title={'Botao de adição do carrinho'}>
+      Adicionar ao carrinho
+    </Button>
   </CardsRestContainer>
 )
 

@@ -65,7 +65,7 @@ const promocoes: Food[] = [
 const Home = () => (
   <>
     <Banner />
-    <CardsList foods={promocoes} />
+    <CardsList foods={promocoes} variant="default" />
   </>
 )
 
