@@ -28,7 +28,7 @@ const dishes: Food[] = [
   },
   {
     id: 2,
-    title: 'Hioki Ssasaushi',
+    title: 'Pizza Marguerita',
     description:
       'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
     category: 'Japonesa',
@@ -37,7 +37,7 @@ const dishes: Food[] = [
   },
   {
     id: 3,
-    title: 'Hioki Ssasaushi',
+    title: 'Pizza Marguerita',
     description:
       'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
     category: 'Japonesa',
@@ -46,7 +46,7 @@ const dishes: Food[] = [
   },
   {
     id: 4,
-    title: 'Hioki Ssasaushi',
+    title: 'Pizza Marguerita',
     description:
       'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
     category: 'Japonesa',
@@ -55,7 +55,7 @@ const dishes: Food[] = [
   },
   {
     id: 5,
-    title: 'Hioki Ssasaushi',
+    title: 'Pizza Marguerita',
     description:
       'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
     category: 'Japonesa',
@@ -64,7 +64,7 @@ const dishes: Food[] = [
   },
   {
     id: 6,
-    title: 'Hioki Ssasaushi',
+    title: 'Pizza Marguerita',
     description:
       'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
     category: 'Japonesa',

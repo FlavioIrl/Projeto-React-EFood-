@@ -35,8 +35,6 @@ export const Background = styled.div`
   text-align: center;
 `
 
-export const LogoImage = styled.img``
-
 export const Carrinho = styled.p`
   font-size: 18px;
   font-weight: bold;

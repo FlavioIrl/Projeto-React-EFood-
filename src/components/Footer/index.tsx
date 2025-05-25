@@ -1,29 +1,37 @@
-import { Container } from './styles'
+import { Container, Icons, ContainerIcons } from './styles'
+import Logo from '../../assets/images/logo.png'
 
 const Footer = () => (
   <Container>
-    <div className="container">
-      <img src="" alt="" />
-      <div>
-        <a
-          href="https://instagram.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <i className="fab fa-instagram" style={{ fontSize: '24px' }} />
-        </a>
-        <a
-          href="https://facebook.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <i className="fab fa-facebook-f" style={{ fontSize: '24px' }} />
-        </a>
-        <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-          <i className="fab fa-twitter" style={{ fontSize: '24px' }} />
-        </a>
-      </div>
-    </div>
+    <img src={Logo} alt="papel de fundo" />
+    <ContainerIcons>
+      <Icons
+        href="https://instagram.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <i className="fab fa-instagram" />
+      </Icons>
+      <Icons
+        href="https://facebook.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <i className="fab fa-facebook-f" />
+      </Icons>
+      <Icons
+        href="https://twitter.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <i className="fab fa-twitter" />
+      </Icons>
+    </ContainerIcons>
+    <p>
+      A efood é uma plataforma para divulgação de estabelecimentos, a
+      responsabilidade pela entrega, qualidade dos produtos é toda do
+      estabelecimento contratado.
+    </p>
   </Container>
 )
 
