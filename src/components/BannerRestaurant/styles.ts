@@ -27,7 +27,7 @@ export const Container = styled.div`
 
 export const Background = styled.div`
   width: 100%;
-  height: 186px;
+  height: 160px;
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;

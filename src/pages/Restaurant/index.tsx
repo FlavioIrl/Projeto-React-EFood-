@@ -1,7 +1,7 @@
-import CardsList from '../../components/CardsList'
 import Hioki from '../../assets/images/HiokiSushi.png'
 import Food from '../../models/Food'
 import HeaderRestaurant from '../../components/HeaderRestaurant'
+import CardsRestList from '../../components/CardsRestList'
 
 const dishes: Food[] = [
   {
@@ -23,7 +23,7 @@ const Restaurant = () => (
       category={dishes[0].category}
       image={dishes[0].image}
     />
-    <CardsList foods={dishes} />
+    <CardsRestList foods={dishes} />
   </>
 )
 

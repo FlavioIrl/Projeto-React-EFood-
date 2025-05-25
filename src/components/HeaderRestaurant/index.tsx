@@ -9,9 +9,15 @@ type Props = {
 const HeaderRestaurant = ({ image, title, category }: Props) => (
   <>
     <BannerRestaurant />
-    <ImageHeader style={{ backgroundImage: `url(${image})` }}>
-      <Category>{category}</Category>
-      <Title>{title}</Title>
+    <ImageHeader
+      style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${image})`
+      }}
+    >
+      <div className="container">
+        <Category>{category}</Category>
+        <Title>{title}</Title>
+      </div>
     </ImageHeader>
   </>
 )
