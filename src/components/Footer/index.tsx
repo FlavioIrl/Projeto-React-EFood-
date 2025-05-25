@@ -24,7 +24,7 @@ const Footer = () => (
       </Icons>
     </ContainerIcons>
     <p>
-      A efood é uma plataforma para divulgação de estabelecimentos, a
+      A Efood é uma plataforma para divulgação de estabelecimentos, a
       responsabilidade pela entrega, qualidade dos produtos é toda do
       estabelecimento contratado.
     </p>
