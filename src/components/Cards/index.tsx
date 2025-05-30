@@ -17,7 +17,7 @@ type Props = {
   category: string
   description: string
   image: string
-  highlight?: string
+  highlight?: boolean
   rating: number
   title: string
 }
@@ -36,7 +36,7 @@ const Cards = ({
       <InfoTop>
         <h3>{title}</h3>
         <InfoTags>
-          {highlight && <Tag>{highlight}</Tag>}
+          {highlight && <Tag>Destaque da semana</Tag>}
           <Tag>{category}</Tag>
         </InfoTags>
         <Evaluation>

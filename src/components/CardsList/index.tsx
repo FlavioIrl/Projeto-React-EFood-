@@ -1,22 +1,22 @@
-import Food from '../../models/Food'
+import { Foods } from '../../pages/Home'
 import CardsRest from '../CardsRest'
 import Cards from '../Cards'
 import { Container, List, ListContainer } from './styles'
 
 type Props = {
-  foods: Food[]
+  foods: Foods[]
   variant: 'rest' | 'default'
 }
 
 const CardsList = ({ foods, variant }: Props) => {
-  const renderCard = (food: Food) => {
+  const renderCard = (food: Foods) => {
     if (variant === 'rest') {
       return (
         <CardsRest
           key={food.id}
-          title={food.title}
-          image={food.image}
-          description={food.description}
+          title={food.titulo}
+          image={food.capa}
+          description={food.descricao}
         />
       )
     }
@@ -24,12 +24,12 @@ const CardsList = ({ foods, variant }: Props) => {
     return (
       <Cards
         key={food.id}
-        title={food.title}
-        category={food.category}
-        description={food.description}
-        rating={food.rating}
-        highlight={food.highlight}
-        image={food.image}
+        title={food.titulo}
+        category={food.tipo}
+        description={food.descricao}
+        rating={food.avaliacao}
+        highlight={food.destacado}
+        image={food.capa}
       />
     )
   }
