@@ -31,6 +31,7 @@ const Home = () => {
     <>
       <Banner />
       <CardsList foods={restaurant} variant="default" />
+      <CardsList foods={restaurant} variant="default" />
     </>
   )
 }

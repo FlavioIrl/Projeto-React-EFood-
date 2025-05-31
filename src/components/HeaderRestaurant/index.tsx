@@ -1,22 +1,22 @@
 import BannerRestaurant from '../BannerRestaurant'
 import { ImageHeader, Title, Category } from './styles'
+import { Foods } from '../../pages/Home'
+
 type Props = {
-  category: string
-  image: string
-  title: string
+  restaurant: Foods
 }
 
-const HeaderRestaurant = ({ image, title, category }: Props) => (
+const HeaderRestaurant = ({ restaurant }: Props) => (
   <>
     <BannerRestaurant />
     <ImageHeader
       style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${image})`
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${restaurant.capa})`
       }}
     >
       <div className="container">
-        <Category>{category}</Category>
-        <Title>{title}</Title>
+        <Category>{restaurant.tipo}</Category>
+        <Title>{restaurant.titulo}</Title>
       </div>
     </ImageHeader>
   </>

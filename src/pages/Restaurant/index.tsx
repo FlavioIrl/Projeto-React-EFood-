@@ -1,87 +1,28 @@
-import LaDolce from '../../assets/images/LaDolceVita.png'
-import Pizza from '../../assets/images/PizzaMarguerita.png'
-import Food from '../../models/Food'
 import HeaderRestaurant from '../../components/HeaderRestaurant'
 import CardsList from '../../components/CardsList'
+import { Foods } from '../Home'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
-const banner: Food[] = [
-  {
-    id: 5,
-    title: 'La Dolce Vita',
-    description:
-      'A La Dolce Vita Trattoria leva a autêntica cozinha italiana até você! Desfrute de massas caseiras, pizzas deliciosas e risotos incríveis, tudo no conforto do seu lar. Entrega rápida, pratos bem embalados e sabor inesquecível. Peça já!',
-    category: 'Italiana',
-    image: LaDolce,
-    rating: 4.6
-  }
-]
+const Restaurant = () => {
+  const { id } = useParams()
 
-const dishes: Food[] = [
-  {
-    id: 1,
-    title: 'Pizza Marguerita',
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    category: 'Italiana',
-    image: Pizza,
-    rating: 4.9
-  },
-  {
-    id: 2,
-    title: 'Pizza Marguerita',
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    category: 'Japonesa',
-    image: Pizza,
-    rating: 4.9
-  },
-  {
-    id: 3,
-    title: 'Pizza Marguerita',
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    category: 'Japonesa',
-    image: Pizza,
-    rating: 4.9
-  },
-  {
-    id: 4,
-    title: 'Pizza Marguerita',
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    category: 'Japonesa',
-    image: Pizza,
-    rating: 4.9
-  },
-  {
-    id: 5,
-    title: 'Pizza Marguerita',
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    category: 'Japonesa',
-    image: Pizza,
-    rating: 4.9
-  },
-  {
-    id: 6,
-    title: 'Pizza Marguerita',
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    category: 'Japonesa',
-    image: Pizza,
-    rating: 4.9
-  }
-]
+  const [restaurant, setRestaurant] = useState<Foods>()
 
-const Restaurant = () => (
-  <>
-    <HeaderRestaurant
-      title={banner[0].title}
-      category={banner[0].category}
-      image={banner[0].image}
-    />
-    <CardsList foods={dishes} variant="rest" />
-  </>
-)
+  useEffect(() => {
+    fetch(`https://fake-api-tau.vercel.app/api/eplay/jogos/${id}`)
+      .then((res) => res.json())
+      .then((res) => setRestaurant(res))
+  }, [id])
+
+  if (!restaurant) return <p>Carregando...</p>
+
+  return (
+    <>
+      <HeaderRestaurant restaurant={restaurant} />
+      <CardsList foods={restaurant.cardapio} variant="rest" />
+    </>
+  )
+}
 
 export default Restaurant
