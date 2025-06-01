@@ -17,10 +17,11 @@ const Restaurant = () => {
 
   if (!restaurant) return <p>Carregando...</p>
 
+  console.log('cardapio:', restaurant.cardapio)
   return (
     <>
       <HeaderRestaurant foods={restaurant} />
-      <MenuList foods={[restaurant.cardapio]} />
+      <MenuList foods={restaurant.cardapio} />
     </>
   )
 }

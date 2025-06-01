@@ -16,7 +16,7 @@ export type Foods = {
     nome: string
     descricao: string
     porcao?: string
-  }
+  }[]
 }
 
 const Home = () => {
