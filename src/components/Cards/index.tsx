@@ -20,6 +20,7 @@ type Props = {
   highlight?: boolean
   rating: number
   title: string
+  id: number
 }
 
 const Cards = ({
@@ -28,7 +29,8 @@ const Cards = ({
   highlight,
   title,
   image,
-  rating
+  rating,
+  id
 }: Props) => (
   <CardsContainer>
     <Image src={image} alt={title} />
@@ -46,7 +48,11 @@ const Cards = ({
       </InfoTop>
       <Description>{description}</Description>
 
-      <Button type="link" to="/restaurant" title="Click para mais informações">
+      <Button
+        type="link"
+        to={`/restaurant/${id}`}
+        title="Click para mais informações"
+      >
         Saiba mais
       </Button>
     </Infos>

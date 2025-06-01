@@ -2,19 +2,23 @@ import Button from '../Button'
 import { Image, CardsRestContainer, Title, Description } from './styles'
 
 type Props = {
-  description: string
-  image: string
-  title: string
+  descricao: string
+  foto: string
+  nome: string
+  preco: number
+  porcao?: string
 }
 
-const CardsRest = ({ description, image, title }: Props) => (
+const CardsRest = ({ descricao, foto, nome, preco, porcao }: Props) => (
   <CardsRestContainer>
-    <Image src={image} />
-    <Title>{title}</Title>
-    <Description>{description}</Description>
+    <Image src={foto} />
+    <Title>{nome}</Title>
+    <Description>{descricao}</Description>
     <Button type={'button'} title={'Botao de adição do carrinho'}>
       Adicionar ao carrinho
     </Button>
+    <p>{preco}</p>
+    <p>{porcao}</p>
   </CardsRestContainer>
 )
 

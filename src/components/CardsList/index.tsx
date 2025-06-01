@@ -1,47 +1,29 @@
 import { Foods } from '../../pages/Home'
-import CardsRest from '../CardsRest'
 import Cards from '../Cards'
-import { Container, List, ListContainer } from './styles'
+import { Container, List } from './styles'
 
 type Props = {
   foods: Foods[]
-  variant: 'rest' | 'default'
 }
 
-const CardsList = ({ foods, variant }: Props) => {
-  const renderCard = (food: Foods) => {
-    if (variant === 'rest') {
-      return (
-        <CardsRest
-          key={food.id}
-          title={food.titulo}
-          image={food.capa}
-          description={food.descricao}
-        />
-      )
-    }
-
-    return (
-      <Cards
-        key={food.id}
-        title={food.titulo}
-        category={food.tipo}
-        description={food.descricao}
-        rating={food.avaliacao}
-        highlight={food.destacado}
-        image={food.capa}
-      />
-    )
-  }
-
+const CardsList = ({ foods }: Props) => {
   return (
     <Container>
       <div className="container">
-        {variant === 'rest' ? (
-          <ListContainer>{foods.map(renderCard)}</ListContainer>
-        ) : (
-          <List>{foods.map(renderCard)}</List>
-        )}
+        <List>
+          {foods.map((restaurant) => (
+            <Cards
+              key={restaurant.id}
+              id={restaurant.id}
+              title={restaurant.titulo}
+              category={restaurant.tipo}
+              description={restaurant.descricao}
+              rating={restaurant.avaliacao}
+              highlight={restaurant.destacado}
+              image={restaurant.capa}
+            />
+          ))}
+        </List>
       </div>
     </Container>
   )

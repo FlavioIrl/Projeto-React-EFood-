@@ -15,7 +15,7 @@ export type Foods = {
     preco: number
     nome: string
     descricao: string
-    porcao: string
+    porcao?: string
   }
 }
 
@@ -30,8 +30,8 @@ const Home = () => {
   return (
     <>
       <Banner />
-      <CardsList foods={restaurant} variant="default" />
-      <CardsList foods={restaurant} variant="default" />
+      <CardsList foods={restaurant} />
+      <CardsList foods={restaurant} />
     </>
   )
 }
