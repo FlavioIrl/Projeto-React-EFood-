@@ -52,7 +52,7 @@ const CardsRest = ({ descricao, foto, nome, preco, porcao }: Props) => {
                 />
               </TopWindow>
               <Description>{descricao}</Description>
-              <Description>Serve: de {porcao}</Description>
+              <Description>Serve: {porcao}</Description>
               <Button type="button" title="botão de adicionar ao carrinho">
                 {`Adicionar ao carrinho - R$ ${preco.toFixed(2)}`}
               </Button>
