@@ -62,4 +62,5 @@ export const Image = styled.img`
   display: block;
   width: 472px;
   height: 217px;
+  object-fit: cover;
 `

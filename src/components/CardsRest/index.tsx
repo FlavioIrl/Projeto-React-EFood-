@@ -1,11 +1,14 @@
 import { useState } from 'react'
+import fechar from '../../assets/images/close.png'
 import Button from '../Button'
 import {
   Image,
   CardsRestContainer,
   Title,
   Description,
-  WindowContainer
+  WindowContainer,
+  TopWindow,
+  CloseIcon
 } from './styles'
 
 type Props = {
@@ -22,7 +25,7 @@ const CardsRest = ({ descricao, foto, nome, preco, porcao }: Props) => {
   return (
     <>
       <CardsRestContainer>
-        <Image src={foto} />
+        <Image src={foto} onClick={() => setMostrarModal(true)} />
         <Title>{nome}</Title>
         <Description>{descricao}</Description>
         <Button
@@ -36,17 +39,21 @@ const CardsRest = ({ descricao, foto, nome, preco, porcao }: Props) => {
 
       {mostrarModal && (
         <WindowContainer>
-          <div>
+          <div className="overlay" onClick={() => setMostrarModal(false)} />
+          <div className="content" onClick={(e) => e.stopPropagation()}>
             <img src={foto} />
             <div className="container">
-              <h3>{nome}</h3>
+              <TopWindow>
+                <h3>{nome}</h3>
+                <CloseIcon
+                  src={fechar}
+                  alt="Fechar"
+                  onClick={() => setMostrarModal(false)}
+                />
+              </TopWindow>
               <Description>{descricao}</Description>
               <Description>Serve: de {porcao}</Description>
-              <Button
-                type="button"
-                title="Fechar"
-                onClick={() => setMostrarModal(false)}
-              >
+              <Button type="button" title="botão de adicionar ao carrinho">
                 {`Adicionar ao carrinho - R$ ${preco.toFixed(2)}`}
               </Button>
             </div>

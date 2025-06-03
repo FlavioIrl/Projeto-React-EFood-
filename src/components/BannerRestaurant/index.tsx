@@ -4,7 +4,7 @@ import fundo from '../../assets/images/fundo.png'
 import Button from '../Button'
 
 const BannerRestaurant = () => (
-  <Background style={{ backgroundImage: `url(${fundo})` }}>
+  <Background style={{ backgroundImage: `url(${fundo})`, objectFit: 'cover' }}>
     <Container>
       <Button type="link" to="/" title="Botão para voltar aons restaurantes">
         Restaurantes

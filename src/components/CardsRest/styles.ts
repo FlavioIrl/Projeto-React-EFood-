@@ -31,31 +31,61 @@ export const Image = styled.img`
   display: block;
   width: 304px;
   height: 170px;
+  object-fit: cover;
+  cursor: pointer;
 `
-export const WindowContainer = styled.div`
-  background-color: rgba(0, 0, 0, 0.8);
+
+export const TopWindow = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
+  justify-content: space-between;
+`
+
+export const CloseIcon = styled.img`
+  object-fit: cover;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  position: relative;
+  top: -25px;
+  left: 26px;
+`
+
+export const WindowContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 1000;
 
-  > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  > .content {
     background-color: ${cores.salmao};
     padding: 32px;
     display: flex;
-    color: ${cores.branco};
     max-width: 1024px;
-  }
+    z-index: 1;
+    position: relative;
+    color: ${cores.branco};
 
-  img {
-    width: 280px;
-    height: 280px;
-    margin-right: 16px;
+    > img {
+      width: 280px;
+      height: 280px;
+      margin-right: 16px;
+      object-fit: cover;
+    }
   }
 
   p {
