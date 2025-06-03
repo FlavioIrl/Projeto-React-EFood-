@@ -20,7 +20,7 @@ export const CardsRestContainer = styled.div`
   display: grid;
 
   ${ButtonContainer} {
-    background-color: ${cores.BrancoAmarelado};
+    background-color: ${cores.amareloQueimado};
     color: ${cores.salmao};
     font-size: 14px;
     width: 304px;
