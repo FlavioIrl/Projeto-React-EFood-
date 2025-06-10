@@ -7,17 +7,15 @@ export const Container = styled.div`
 `
 
 export const List = styled.div`
-  display: inline-flex;
-  margin-bottom: 40px;
-  justify-content: space-between;
+  display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
+  gap: 32px;
+  margin-bottom: 40px;
 `
 
 export const ListContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
-  margin-top: 60px;
   margin-bottom: 40px;
 `
