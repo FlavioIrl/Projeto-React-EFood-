@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react'
 import Banner from '../../components/Banner'
 import CardsList from '../../components/CardsList'
 import { useGetRestaurantQuery } from '../../services/api'
-import Cart from '../../components/Cart'
 
 export type Foods = {
   id: number
@@ -31,7 +29,6 @@ const Home = () => {
   return (
     <>
       <Banner />
-      <Cart />
       <CardsList foods={filtroDestaque} />
       <CardsList foods={restaurant} />
     </>

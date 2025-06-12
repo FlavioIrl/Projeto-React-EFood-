@@ -11,10 +11,10 @@ const Cart = () => {
 
   console.log('Carrinho aberto?', isOpen)
 
-  const dispath = useDispatch()
+  const dispatch = useDispatch()
 
   const closeCart = () => {
-    dispath(close())
+    dispatch(close())
   }
 
   const getTotalPrice = (items: CartItem[]) => {
@@ -29,7 +29,7 @@ const Cart = () => {
   }
 
   const removeItems = (id: number) => {
-    dispath(remove(id))
+    dispatch(remove(id))
   }
 
   return (

@@ -10,7 +10,7 @@ export const Overlay = styled.div`
   width: 100%;
   height: 100%;
   background-color: #000;
-  opacity: 0.8;
+  opacity: 0.3;
 `
 
 export const CartContainer = styled.div`

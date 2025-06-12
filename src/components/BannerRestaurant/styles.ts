@@ -35,7 +35,11 @@ export const Background = styled.div`
   text-align: center;
 `
 
-export const Carrinho = styled.p`
+export const ButtonCarrinho = styled.button`
   font-size: 18px;
   font-weight: bold;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: ${cores.salmao};
 `
