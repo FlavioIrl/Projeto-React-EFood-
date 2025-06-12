@@ -10,6 +10,8 @@ import {
   TopWindow,
   CloseIcon
 } from './styles'
+import { useDispatch } from 'react-redux'
+import { add, open } from '../../store/reducers/cart'
 
 type Props = {
   descricao: string
@@ -20,7 +22,18 @@ type Props = {
 }
 
 const CardsRest = ({ descricao, foto, nome, preco, porcao }: Props) => {
+  const dispatch = useDispatch()
+
   const [mostrarModal, setMostrarModal] = useState(false)
+
+  const addToCart = () => {
+    const item = { id: Math.random(), descricao, foto, nome, preco }
+
+    console.log('Adicionando item ao carrinho:', item)
+
+    dispatch(add(item))
+    dispatch(open())
+  }
 
   return (
     <>
@@ -53,7 +66,11 @@ const CardsRest = ({ descricao, foto, nome, preco, porcao }: Props) => {
               </TopWindow>
               <Description>{descricao}</Description>
               <Description>Serve: {porcao}</Description>
-              <Button type="button" title="botão de adicionar ao carrinho">
+              <Button
+                type="button"
+                title="botão de adicionar ao carrinho"
+                onClick={addToCart}
+              >
                 {`Adicionar ao carrinho - R$ ${preco.toFixed(2)}`}
               </Button>
             </div>

@@ -19,9 +19,13 @@ export const CartContainer = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
+  display: none;
   justify-content: flex-end;
   z-index: 1;
+
+  &.is-open {
+    display: flex;
+  }
 `
 
 export const SideBar = styled.aside`
@@ -50,7 +54,7 @@ export const Prices = styled.div`
   font-weight: bold;
 `
 
-export const CartItem = styled.li`
+export const CartItems = styled.li`
   background-color: ${cores.amareloQueimado};
   display: flex;
   width: 340px;
