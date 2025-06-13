@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const ImageHeader = styled.div`
   width: 100%;
@@ -8,6 +8,17 @@ export const ImageHeader = styled.div`
   background-size: cover;
   background-position: center;
   display: flex;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    height: 200px;
+  }
+
+  .container {
+    @media (max-width: ${breakpoints.tablet}) {
+      width: 80%;
+      height: 200px;
+    }
+  }
 `
 
 export const Title = styled.h3`
@@ -15,6 +26,10 @@ export const Title = styled.h3`
   font-weight: bold;
   color: ${cores.branco};
   margin-top: 15%;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    font-size: 20px;
+  }
 `
 
 export const Category = styled.h3`
@@ -24,4 +39,8 @@ export const Category = styled.h3`
   font-family: sans-serif;
   font-stretch: ultra-condensed;
   color: rgb(255 255 255 / 75%);
+
+  @media (max-width: ${breakpoints.tablet}) {
+    font-size: 20px;
+  }
 `

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 import { ButtonContainer } from '../Button/styles'
 
 export const Title = styled.p`
@@ -18,19 +18,29 @@ export const CardsRestContainer = styled.div`
   color: #ffebd9;
   padding: 8px;
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  width: 322px;
 
   ${ButtonContainer} {
     background-color: ${cores.amareloQueimado};
     color: ${cores.salmao};
     font-size: 14px;
-    width: 304px;
+    width: 100%;
     margin: 0px;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    width: 322px;
+    margin: 0 auto;
   }
 `
 export const Image = styled.img`
   display: block;
-  width: 304px;
-  height: 170px;
+  width: 100%;
+  max-width: 304px;
+  height: auto;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
   cursor: pointer;
 `
@@ -42,12 +52,16 @@ export const TopWindow = styled.div`
 
 export const CloseIcon = styled.img`
   object-fit: cover;
-  width: 16px;
   height: 16px;
   cursor: pointer;
-  position: relative;
-  top: -25px;
-  left: 26px;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    top: 12px;
+    right: 12px;
+  }
 `
 
 export const WindowContainer = styled.div`
@@ -57,10 +71,10 @@ export const WindowContainer = styled.div`
   right: 0;
   bottom: 0;
   z-index: 1000;
-
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 16px;
 
   .overlay {
     position: fixed;
@@ -73,9 +87,11 @@ export const WindowContainer = styled.div`
 
   > .content {
     background-color: ${cores.salmao};
-    padding: 32px;
+    padding: 24px;
     display: flex;
+    flex-direction: row;
     max-width: 1024px;
+    width: 100%;
     z-index: 1;
     position: relative;
     color: ${cores.branco};
@@ -85,6 +101,19 @@ export const WindowContainer = styled.div`
       height: 280px;
       margin-right: 16px;
       object-fit: cover;
+    }
+
+    @media (max-width: ${breakpoints.tablet}) {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      > img {
+        margin: 0 0 16px 0;
+        width: 100%;
+        max-width: 280px;
+        height: auto;
+      }
     }
   }
 
@@ -96,7 +125,8 @@ export const WindowContainer = styled.div`
     background-color: ${cores.amareloQueimado};
     color: ${cores.salmao};
     font-size: 14px;
-    width: 304px;
-    margin: 0px;
+    width: 100%;
+    max-width: 304px;
+    margin: 0px auto;
   }
 `

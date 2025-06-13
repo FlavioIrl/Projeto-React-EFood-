@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { ButtonLink } from '../Button/styles'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const Container = styled.div`
   display: flex;
@@ -11,6 +11,16 @@ export const Container = styled.div`
   width: 100%;
   justify-content: space-between;
 
+  @media (max-width: ${breakpoints.desktop}) {
+    max-width: 80%;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    > img {
+      width: 110px;
+    }
+  }
+
   ${ButtonLink} {
     background-color: transparent;
     font-size: 18px;
@@ -18,6 +28,10 @@ export const Container = styled.div`
     font-weight: bold;
     padding: 0;
     margin: 0;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      font-size: 14px;
+    }
 
     &:focus {
       outline: none;
@@ -42,4 +56,9 @@ export const ButtonCarrinho = styled.button`
   background-color: transparent;
   border: none;
   color: ${cores.salmao};
+
+  @media (max-width: ${breakpoints.tablet}) {
+    font-size: 14px;
+    width: 80px;
+  }
 `

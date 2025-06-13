@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import lixeira from '../../assets/images/lixeiraDeReciclagem.png'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 import { ButtonContainer } from '../Button/styles'
 
 export const Overlay = styled.div`
@@ -10,7 +10,7 @@ export const Overlay = styled.div`
   width: 100%;
   height: 100%;
   background-color: #000;
-  opacity: 0.3;
+  opacity: 0.8;
 `
 
 export const CartContainer = styled.div`
@@ -42,6 +42,10 @@ export const SideBar = styled.aside`
     width: 100%;
     margin: 0;
   }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    max-width: 230px;
+  }
 `
 
 export const Prices = styled.div`
@@ -52,12 +56,16 @@ export const Prices = styled.div`
   color: ${cores.amareloQueimado};
   font-size: 14px;
   font-weight: bold;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    width: 100%;
+  }
 `
 
 export const CartItems = styled.li`
   background-color: ${cores.amareloQueimado};
   display: flex;
-  width: 340px;
+  width: 100%;
   height: 100px;
   position: relative;
   margin-bottom: 16px;
@@ -66,6 +74,11 @@ export const CartItems = styled.li`
     margin-top: 8px;
     font-size: 18px;
     margin-bottom: 16px;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      width: 100%;
+      font-size: 14px;
+    }
   }
 
   p {
@@ -94,6 +107,11 @@ export const CartItems = styled.li`
     height: 16px;
     border: none;
     cursor: pointer;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      top: 76px;
+      left: 190px;
+    }
   }
 
   div {

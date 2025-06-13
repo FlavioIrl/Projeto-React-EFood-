@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const Container = styled.div`
   display: flex;
@@ -20,4 +20,8 @@ export const ListContainer = styled.div`
   gap: 32px;
   margin-top: 60px;
   margin-bottom: 40px;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `
