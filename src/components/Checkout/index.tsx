@@ -1,25 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
+import { Navigate } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import Button from '../Button'
 import * as S from './styles'
 
+import { clear } from '../../store/reducers/cart'
 import { usePurchaseMutation } from '../../services/api'
 
 const Checkout = () => {
-  const [etapaPagamento, setEtapaPagamento] = useState(false)
   const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation()
   const { items } = useSelector((state: RootReducer) => state.cart)
   const dispatch = useDispatch()
-
-  const checkInputError = (fieldName: string) => {
-    const isTouched = fieldName in form.touched
-    const isInvalid = fieldName in form.errors
-    return isTouched && isInvalid
-  }
 
   const form = useFormik({
     initialValues: {
@@ -92,108 +87,159 @@ const Checkout = () => {
     }
   })
 
+  const checkInputError = (fieldName: string) => {
+    const isTouched = fieldName in form.touched
+    const isInvalid = fieldName in form.errors
+    const hasError = isTouched && isInvalid
+
+    return hasError
+  }
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(clear())
+    }
+  }, [isSuccess, dispatch])
+
+  if (items.length === 0 && !isSuccess) {
+    return <Navigate to="/" />
+  }
+
   return (
     <S.CheckoutContainer>
       <S.Overlay />
 
-      {etapaPagamento ? (
+      {isSuccess && data ? (
         <S.SideBar>
-          <h3>Entrega</h3>
-          <S.Card>
-            <S.InputGroup>
-              <label htmlFor="fullName">Quem irá receber</label>
-              <input
-                type="text"
-                id="fullName"
-                name="fullName"
-                value={form.values.fullName}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-                className={checkInputError('fullName') ? 'error' : ''}
-              />
-            </S.InputGroup>
-
-            <S.InputGroup>
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={form.values.email}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-                className={checkInputError('email') ? 'error' : ''}
-              />
-            </S.InputGroup>
-
-            <S.InputGroup>
-              <label htmlFor="cpf">CPF</label>
-              <input
-                type="text"
-                id="cpf"
-                name="cpf"
-                value={form.values.cpf}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-                className={checkInputError('cpf') ? 'error' : ''}
-              />
-            </S.InputGroup>
-
-            <S.Local>
-              <S.InputGroup>
-                <label htmlFor="zipCode">CEP</label>
-                <input
-                  type="text"
-                  id="zipCode"
-                  name="zipCode"
-                  value={form.values.zipCode}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  className={checkInputError('zipCode') ? 'error' : ''}
-                />
-              </S.InputGroup>
-
-              <S.InputGroup>
-                <label htmlFor="phoneNumber">Telefone</label>
-                <input
-                  type="text"
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  value={form.values.phoneNumber}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  className={checkInputError('phoneNumber') ? 'error' : ''}
-                />
-              </S.InputGroup>
-            </S.Local>
-
-            <S.InputGroup>
-              <label htmlFor="addressExtra">Complemento</label>
-              <input
-                type="text"
-                id="addressExtra"
-                name="addressExtra"
-                value={form.values.addressExtra}
-                onChange={form.handleChange}
-                onBlur={form.handleBlur}
-                className={checkInputError('addressExtra') ? 'error' : ''}
-              />
-            </S.InputGroup>
-          </S.Card>
-
+          <h3>Pedido realizado - Id</h3>
+          <br />
+          <p>
+            Estamos felizes em informar que seu pedido já está em processo de
+            preparação e, em breve, será entregue no endereço fornecido.
+          </p>
+          <br />
+          <p>
+            Gostaríamos de ressaltar que nossos entregadores não estão
+            autorizados a realizar cobranças extras.
+          </p>
+          <br />
+          <p>
+            Lembre-se da importância de higienizar as mãos após o recebimento do
+            pedido, garantindo assim sua segurança e bem-estar durante a
+            refeição.
+          </p>
+          <br />
+          <p>
+            Esperamos que desfrute de uma deliciosa e agradável experiência
+            gastronômica. Bom apetite!
+          </p>
+          <br />
+          <br />
           <Button
             type="button"
-            title="Ir para pagamento"
-            onClick={() => setEtapaPagamento(false)}
+            title="Finalizar o pagamento"
+            onClick={form.handleSubmit}
           >
-            Continuar com pagamento
-          </Button>
-
-          <Button type="button" title="Voltar para o carrinho">
-            Voltar para o carrinho
+            Concluir
           </Button>
         </S.SideBar>
       ) : (
+        // <S.SideBar>
+        //   <h3>Entrega</h3>
+        //   <S.Card>
+        //     <S.InputGroup>
+        //       <label htmlFor="fullName">Quem irá receber</label>
+        //       <input
+        //         type="text"
+        //         id="fullName"
+        //         name="fullName"
+        //         value={form.values.fullName}
+        //         onChange={form.handleChange}
+        //         onBlur={form.handleBlur}
+        //         className={checkInputError('fullName') ? 'error' : ''}
+        //       />
+        //     </S.InputGroup>
+
+        //     <S.InputGroup>
+        //       <label htmlFor="email">Email</label>
+        //       <input
+        //         type="email"
+        //         id="email"
+        //         name="email"
+        //         value={form.values.email}
+        //         onChange={form.handleChange}
+        //         onBlur={form.handleBlur}
+        //         className={checkInputError('email') ? 'error' : ''}
+        //       />
+        //     </S.InputGroup>
+
+        //     <S.InputGroup>
+        //       <label htmlFor="cpf">CPF</label>
+        //       <input
+        //         type="text"
+        //         id="cpf"
+        //         name="cpf"
+        //         value={form.values.cpf}
+        //         onChange={form.handleChange}
+        //         onBlur={form.handleBlur}
+        //         className={checkInputError('cpf') ? 'error' : ''}
+        //       />
+        //     </S.InputGroup>
+
+        //     <S.Local>
+        //       <S.InputGroup>
+        //         <label htmlFor="zipCode">CEP</label>
+        //         <input
+        //           type="text"
+        //           id="zipCode"
+        //           name="zipCode"
+        //           value={form.values.zipCode}
+        //           onChange={form.handleChange}
+        //           onBlur={form.handleBlur}
+        //           className={checkInputError('zipCode') ? 'error' : ''}
+        //         />
+        //       </S.InputGroup>
+
+        //       <S.InputGroup>
+        //         <label htmlFor="phoneNumber">Telefone</label>
+        //         <input
+        //           type="text"
+        //           id="phoneNumber"
+        //           name="phoneNumber"
+        //           value={form.values.phoneNumber}
+        //           onChange={form.handleChange}
+        //           onBlur={form.handleBlur}
+        //           className={checkInputError('phoneNumber') ? 'error' : ''}
+        //         />
+        //       </S.InputGroup>
+        //     </S.Local>
+
+        //     <S.InputGroup>
+        //       <label htmlFor="addressExtra">Complemento</label>
+        //       <input
+        //         type="text"
+        //         id="addressExtra"
+        //         name="addressExtra"
+        //         value={form.values.addressExtra}
+        //         onChange={form.handleChange}
+        //         onBlur={form.handleBlur}
+        //         className={checkInputError('addressExtra') ? 'error' : ''}
+        //       />
+        //     </S.InputGroup>
+        //   </S.Card>
+
+        //   <Button
+        //     type="button"
+        //     title="Ir para pagamento"
+        //     onClick={() => setEtapaPagamento(false)}
+        //   >
+        //     Continuar com pagamento
+        //   </Button>
+
+        //   <Button type="button" title="Voltar para o carrinho">
+        //     Voltar para o carrinho
+        //   </Button>
+        // </S.SideBar>
         <S.SideBar>
           <h3>Pagamento - Valor a pagar</h3>
           <form onSubmit={form.handleSubmit}>
@@ -290,7 +336,7 @@ const Checkout = () => {
             <Button
               type="button"
               title="Voltar para entrega"
-              onClick={() => setEtapaPagamento(true)}
+              onClick={form.handleSubmit}
             >
               Voltar para a edição de endereço
             </Button>

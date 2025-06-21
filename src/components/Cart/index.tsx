@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { SideBar, CartContainer, CartItems, Prices, Overlay } from './styles'
 
 import Button from '../Button'
+import { useNavigate } from 'react-router-dom'
 
 const Cart = () => {
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
@@ -12,6 +13,7 @@ const Cart = () => {
   console.log('Carrinho aberto?', isOpen)
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const closeCart = () => {
     dispatch(close())
@@ -30,6 +32,11 @@ const Cart = () => {
 
   const removeItems = (id: number) => {
     dispatch(remove(id))
+  }
+
+  const goToChekout = () => {
+    navigate('/checkout')
+    closeCart()
   }
 
   return (
@@ -55,7 +62,11 @@ const Cart = () => {
             {''}
           </p>
         </Prices>
-        <Button type="button" title={'Clicke e continue o pagamento'}>
+        <Button
+          type="button"
+          title={'Clicke e continue o pagamento'}
+          onClick={goToChekout}
+        >
           Continuar com a compra
         </Button>
       </SideBar>
