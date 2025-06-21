@@ -2,6 +2,10 @@ import styled from 'styled-components'
 import { cores } from '../../styles'
 import { ButtonContainer } from '../Button/styles'
 
+type InputGroupProps = {
+  maxWidth?: string
+}
+
 export const CheckoutContainer = styled.div`
   position: fixed;
   top: 0;
@@ -43,6 +47,13 @@ export const SideBar = styled.div`
     margin: 0;
     margin-top: 8px;
   }
+
+  .marginTop {
+    margin-top: 16px;
+  }
+  .marginBottom {
+    margin-bottom: 24px;
+  }
 `
 
 export const InputGroup = styled.div`
@@ -57,13 +68,14 @@ export const InputGroup = styled.div`
   input {
     margin: 8px 0;
     background-color: ${cores.amareloQueimado};
-    border: none;
+    border: 1px solid ${cores.amareloQueimado};
     padding: 8px;
   }
 `
 
 export const Local = styled.div`
   display: flex;
+  flex: auto;
   flex-direction: row;
   justify-content: space-between;
 
