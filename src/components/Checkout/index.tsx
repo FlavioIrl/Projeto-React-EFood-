@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Button from '../Button'
 import * as S from './styles'
 import { useFormik } from 'formik'
-import * as  Yup from 'yup'
+import * as Yup from 'yup'
 
 const Checkout = () => {
   const [isDeliveryStep, setIsDeliveryStep] = useState(true)
@@ -26,7 +26,7 @@ const Checkout = () => {
       fullName: Yup.string()
         .min(5, 'O nome precisa ter pelo menos 5 caracteres')
         .required('O campo é obrigatório'),
-      
+
       email: Yup.string()
         .email('E-mail inválido')
         .required('O campo é obrigatório'),
@@ -40,17 +40,43 @@ const Checkout = () => {
         .min(5, 'O nome precisa ter pelo menos 5 caracteres')
         .required('O campo é obrigatório'),
 
-      // phoneNumber: Yup.string()
-      //   // .matches()
-
-      addressExtra: Yup.string()
-        .max(100, 'O complemento não pode ter mais que 100 caracteres'),
+      phoneNumber: Yup.string().required('O campo é obrigatório'),
+      addressExtra: Yup.string().max(
+        100,
+        'O complemento não pode ter mais que 100 caracteres'
+      ),
+      cardOwner: Yup.string().when((values, schema) =>
+        !isDeliveryStep ? schema.required('O campo é obrigatório') : schema
+      ),
+      cardEmail: Yup.string().when((values, schema) =>
+        !isDeliveryStep ? schema.required('O campo é obrigatório') : schema
+      ),
+      cardNumber: Yup.string().when((values, schema) =>
+        !isDeliveryStep ? schema.required('O campo é obrigatório') : schema
+      ),
+      cardCode: Yup.string().when((values, schema) =>
+        !isDeliveryStep ? schema.required('O campo é obrigatório') : schema
+      ),
+      expiresMonth: Yup.string().when((values, schema) =>
+        !isDeliveryStep ? schema.required('O campo é obrigatório') : schema
+      ),
+      expiresYear: Yup.string().when((values, schema) =>
+        !isDeliveryStep ? schema.required('O campo é obrigatório') : schema
+      )
     }),
     onSubmit: (values) => {
       console.log(values)
     }
   })
-  console.log(form)
+
+  const getErrorMessage = (fieldName: string, message?: string) => {
+    const isTouched = fieldName in form.touched
+    const isInvalid = fieldName in form.errors
+
+    if (isTouched && isInvalid) return message
+    return ''
+  }
+
   return (
     <form onSubmit={form.handleSubmit}>
       <S.CheckoutContainer>
@@ -66,8 +92,12 @@ const Checkout = () => {
                   id="fullName"
                   name="fullName"
                   value={form.values.fullName}
-                  onBlur={form.handleChange}
+                  onChange={form.handleChange}
+                  onBlur={form.handleBlur}
                 />
+                <small>
+                  {getErrorMessage('fullName', form.errors.fullName)}
+                </small>
               </S.InputGroup>
 
               <S.InputGroup>
@@ -77,8 +107,10 @@ const Checkout = () => {
                   id="email"
                   name="email"
                   value={form.values.email}
-                  onBlur={form.handleChange}
+                  onChange={form.handleChange}
+                  onBlur={form.handleBlur}
                 />
+                <small>{getErrorMessage('email', form.errors.email)}</small>
               </S.InputGroup>
 
               <S.InputGroup>
@@ -88,8 +120,10 @@ const Checkout = () => {
                   id="cpf"
                   name="cpf"
                   value={form.values.cpf}
-                  onBlur={form.handleChange}
+                  onChange={form.handleChange}
+                  onBlur={form.handleBlur}
                 />
+                <small>{getErrorMessage('cpf', form.errors.cpf)}</small>
               </S.InputGroup>
 
               <S.Local>
@@ -100,8 +134,12 @@ const Checkout = () => {
                     id="zipCode"
                     name="zipCode"
                     value={form.values.zipCode}
-                    onBlur={form.handleChange}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
                   />
+                  <small>
+                    {getErrorMessage('zipCode', form.errors.zipCode)}
+                  </small>
                 </S.InputGroup>
 
                 <S.InputGroup>
@@ -111,8 +149,12 @@ const Checkout = () => {
                     id="phoneNumber"
                     name="phoneNumber"
                     value={form.values.phoneNumber}
-                    onBlur={form.handleChange}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
                   />
+                  <small>
+                    {getErrorMessage('phoneNumber', form.errors.phoneNumber)}
+                  </small>
                 </S.InputGroup>
               </S.Local>
 
@@ -123,15 +165,27 @@ const Checkout = () => {
                   id="addressExtra"
                   name="addressExtra"
                   value={form.values.addressExtra}
-                  onBlur={form.handleChange}
+                  onChange={form.handleChange}
+                  onBlur={form.handleBlur}
                 />
+                <small>
+                  {getErrorMessage('addressExtra', form.errors.addressExtra)}
+                </small>
               </S.InputGroup>
             </S.Card>
 
             <Button
               type="button"
               title="Ir para pagamento"
-              onClick={() => setIsDeliveryStep(false)}
+              onClick={() => {
+                if (form.isValid) {
+                  setIsDeliveryStep(false)
+                } else {
+                  // Se o formulário não for válido, pode exibir uma mensagem de erro ou apenas evitar a navegação.
+                  console.log('Por favor, corrija os erros antes de continuar')
+                }
+              }}
+              disabled={!form.isValid} // Desabilita o botão caso o formulário não seja válido
             >
               Continuar com pagamento
             </Button>
@@ -155,8 +209,12 @@ const Checkout = () => {
                   id="cardOwner"
                   name="cardOwner"
                   value={form.values.cardOwner}
-                  onBlur={form.handleChange}
+                  onChange={form.handleChange}
+                  onBlur={form.handleBlur}
                 />
+                <small>
+                  {getErrorMessage('cardOwner', form.errors.cardOwner)}
+                </small>
               </S.InputGroup>
 
               <S.InputGroup>
@@ -166,8 +224,12 @@ const Checkout = () => {
                   id="cardEmail"
                   name="cardEmail"
                   value={form.values.cardEmail}
-                  onBlur={form.handleChange}
+                  onChange={form.handleChange}
+                  onBlur={form.handleBlur}
                 />
+                <small>
+                  {getErrorMessage('cardEmail', form.errors.cardEmail)}
+                </small>
               </S.InputGroup>
 
               <S.InputGroupPag>
@@ -178,8 +240,12 @@ const Checkout = () => {
                     id="cardNumber"
                     name="cardNumber"
                     value={form.values.cardNumber}
-                    onBlur={form.handleChange}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
                   />
+                  <small>
+                    {getErrorMessage('cardNumber', form.errors.cardNumber)}
+                  </small>
                 </S.InputGroup>
 
                 <S.InputGroup>
@@ -189,8 +255,12 @@ const Checkout = () => {
                     id="cardCode"
                     name="cardCode"
                     value={form.values.cardCode}
-                    onBlur={form.handleChange}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
                   />
+                  <small>
+                    {getErrorMessage('cardCode', form.errors.cardCode)}
+                  </small>
                 </S.InputGroup>
               </S.InputGroupPag>
 
@@ -202,8 +272,12 @@ const Checkout = () => {
                     id="expiresMonth"
                     name="expiresMonth"
                     value={form.values.expiresMonth}
-                    onBlur={form.handleChange}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
                   />
+                  <small>
+                    {getErrorMessage('expiresMonth', form.errors.expiresMonth)}
+                  </small>
                 </S.InputGroup>
 
                 <S.InputGroup>
@@ -213,8 +287,12 @@ const Checkout = () => {
                     id="expiresYear"
                     name="expiresYear"
                     value={form.values.expiresYear}
-                    onBlur={form.handleChange}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
                   />
+                  <small>
+                    {getErrorMessage('expiresYear', form.errors.expiresYear)}
+                  </small>
                 </S.InputGroup>
               </S.Local>
             </S.Card>
@@ -236,6 +314,7 @@ const Checkout = () => {
             </Button>
           </S.SideBar>
         )}
+
         {/* <S.SideBar>
           <h3>Pedido realizado - Id</h3>
           <p className='marginTop'>
