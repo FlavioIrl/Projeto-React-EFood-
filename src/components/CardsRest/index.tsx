@@ -1,15 +1,7 @@
 import { useState } from 'react'
 import fechar from '../../assets/images/close.png'
 import Button from '../Button'
-import {
-  Image,
-  CardsRestContainer,
-  Title,
-  Description,
-  WindowContainer,
-  TopWindow,
-  CloseIcon
-} from './styles'
+import * as S from './styles'
 import { useDispatch } from 'react-redux'
 import { add, open } from '../../store/reducers/cart'
 
@@ -35,10 +27,10 @@ const CardsRest = ({ descricao, foto, nome, preco, porcao }: Props) => {
 
   return (
     <>
-      <CardsRestContainer>
-        <Image src={foto} onClick={() => setMostrarModal(true)} />
-        <Title>{nome}</Title>
-        <Description>{descricao}</Description>
+      <S.CardsRestContainer>
+        <S.Image src={foto} onClick={() => setMostrarModal(true)} />
+        <S.Title>{nome}</S.Title>
+        <S.Description>{descricao}</S.Description>
         <Button
           type={'button'}
           title={'Botao de adição do carrinho'}
@@ -46,24 +38,24 @@ const CardsRest = ({ descricao, foto, nome, preco, porcao }: Props) => {
         >
           Adicionar ao carrinho
         </Button>
-      </CardsRestContainer>
+      </S.CardsRestContainer>
 
       {mostrarModal && (
-        <WindowContainer>
+        <S.WindowContainer>
           <div className="overlay" onClick={() => setMostrarModal(false)} />
           <div className="content" onClick={(e) => e.stopPropagation()}>
             <img src={foto} />
             <div className="container">
-              <TopWindow>
+              <S.TopWindow>
                 <h3>{nome}</h3>
-                <CloseIcon
+                <S.CloseIcon
                   src={fechar}
                   alt="Fechar"
                   onClick={() => setMostrarModal(false)}
                 />
-              </TopWindow>
-              <Description>{descricao}</Description>
-              <Description>Serve: {porcao}</Description>
+              </S.TopWindow>
+              <S.Description>{descricao}</S.Description>
+              <S.Description>Serve: {porcao}</S.Description>
               <Button
                 type="button"
                 title="botão de adicionar ao carrinho"
@@ -73,7 +65,7 @@ const CardsRest = ({ descricao, foto, nome, preco, porcao }: Props) => {
               </Button>
             </div>
           </div>
-        </WindowContainer>
+        </S.WindowContainer>
       )}
     </>
   )

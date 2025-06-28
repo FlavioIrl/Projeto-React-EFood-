@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { breakpoints, cores } from '../../styles'
+import { breakpoints, color } from '../../styles'
 
 export const Container = styled.footer`
   background-color: #ffebd9;
@@ -41,8 +41,8 @@ export const Icons = styled.a`
   border-radius: 50%;
   width: 24px;
   height: 24px;
-  color: ${cores.BrancoAmarelado};
-  background-color: ${cores.salmao};
+  color: ${color.whitishYellow};
+  background-color: ${color.salmon};
   display: flex;
   align-items: center;
   justify-content: center;

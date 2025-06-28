@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { color } from '../../styles'
 
 export const ButtonContainer = styled.button`
   margin: 8px;
   border: none;
   font-size: 16px;
   font-weight: bold;
-  color: ${cores.branco};
-  background-color: ${cores.salmao};
+  color: ${color.white};
+  background-color: ${color.salmon};
   padding: 6px 8px;
   cursor: pointer;
 `
@@ -17,8 +17,8 @@ export const ButtonLink = styled(Link)`
   border: none;
   font-size: 16px;
   font-weight: bold;
-  color: ${cores.branco};
-  background-color: ${cores.salmao};
+  color: ${color.white};
+  background-color: ${color.salmon};
   padding: 6px 8px;
   cursor: pointer;
   text-decoration: none;

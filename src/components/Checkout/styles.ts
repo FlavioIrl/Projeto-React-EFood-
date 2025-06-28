@@ -1,10 +1,6 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, color } from '../../styles'
 import { ButtonContainer } from '../Button/styles'
-
-type InputGroupProps = {
-  maxWidth?: string
-}
 
 export const CheckoutContainer = styled.div`
   position: fixed;
@@ -15,7 +11,7 @@ export const CheckoutContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   z-index: 1;
-  color: ${cores.amareloQueimado};
+  color: ${color.whitishYellow};
 `
 
 export const Overlay = styled.div`
@@ -33,7 +29,7 @@ export const Overlay = styled.div`
 `
 
 export const SideBar = styled.div`
-  background-color: ${cores.salmao};
+  background-color: ${color.salmon};
   z-index: 1;
   max-width: 360px;
   width: 100%;
@@ -44,9 +40,9 @@ export const SideBar = styled.div`
   }
 
   ${ButtonContainer} {
-    background-color: ${cores.amareloQueimado};
+    background-color: ${color.whitishYellow};
     font-size: 14px;
-    color: ${cores.salmao};
+    color: ${color.salmon};
     width: 100%;
     margin: 0;
     margin-top: 8px;
@@ -57,6 +53,10 @@ export const SideBar = styled.div`
   }
   .marginBottom {
     margin-bottom: 24px;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    max-width: 230px;
   }
 `
 
@@ -71,21 +71,32 @@ export const InputGroup = styled.div`
 
   input {
     margin: 8px 0;
-    background-color: ${cores.amareloQueimado};
-    border: 1px solid ${cores.amareloQueimado};
+    background-color: ${color.whitishYellow};
+    border: 1px solid ${color.whitishYellow};
     padding: 8px;
   }
 `
 
 export const Local = styled.div`
   display: flex;
-  flex: auto;
-  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
   justify-content: space-between;
 
   div {
+    flex: 1 1 45%;
+    min-width: 100px;
+
     input {
-      padding: 8px 3px;
+      padding: 8px 1px;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    flex-direction: column;
+    div {
+      width: 100%;
     }
   }
 `
@@ -96,19 +107,32 @@ export const Card = styled.div`
 
 export const InputGroupPag = styled.div`
   display: flex;
-  flex-direction: row;
+  gap: 8px;
   justify-content: space-between;
+  flex-wrap: wrap;
 
   > div:first-child {
-    width: 228px;
+    flex: 1 1 60%;
+    min-width: 150px;
+
     input {
       width: 100%;
     }
   }
 
   > div:last-child {
-    width: 87px;
+    flex: 1 1 35%;
+    min-width: 87px;
+
     input {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    flex-direction: column;
+
+    > div {
       width: 100%;
     }
   }

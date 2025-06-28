@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { breakpoints, cores } from '../../styles'
+import { breakpoints, color } from '../../styles'
 import { ButtonContainer } from '../Button/styles'
 
 export const Title = styled.p`
@@ -14,42 +14,50 @@ export const Description = styled.p`
 `
 
 export const CardsRestContainer = styled.div`
-  background-color: ${cores.salmao};
+  background-color: ${color.salmon};
   color: #ffebd9;
   padding: 8px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
-  width: 322px;
+  width: 100%;
+  max-width: 322px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
   ${ButtonContainer} {
-    background-color: ${cores.amareloQueimado};
-    color: ${cores.salmao};
+    background-color: ${color.whitishYellow};
+    color: ${color.salmon};
     font-size: 14px;
-    width: 100%;
-    margin: 0px;
+    margin-top: auto;
   }
 
   @media (max-width: ${breakpoints.tablet}) {
-    width: 322px;
     margin: 0 auto;
   }
 `
+
 export const Image = styled.img`
-  display: block;
   width: 100%;
   max-width: 304px;
-  height: auto;
   aspect-ratio: 16 / 9;
   object-fit: cover;
   cursor: pointer;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    max-width: 100%;
+  }
 `
 
 export const TopWindow = styled.div`
   display: flex;
   justify-content: space-between;
-`
 
+  @media (max-width: ${breakpoints.tablet}) {
+    h3 {
+      margin: 0 auto;
+    }
+  }
+`
 export const CloseIcon = styled.img`
   object-fit: cover;
   height: 16px;
@@ -86,7 +94,7 @@ export const WindowContainer = styled.div`
   }
 
   > .content {
-    background-color: ${cores.salmao};
+    background-color: ${color.salmon};
     padding: 24px;
     display: flex;
     flex-direction: row;
@@ -94,7 +102,7 @@ export const WindowContainer = styled.div`
     width: 100%;
     z-index: 1;
     position: relative;
-    color: ${cores.branco};
+    color: ${color.white};
 
     > img {
       width: 280px;
@@ -107,11 +115,12 @@ export const WindowContainer = styled.div`
       flex-direction: column;
       align-items: center;
       text-align: center;
+      width: 90%; // <--- Aumenta a largura no mobile
 
       > img {
         margin: 0 0 16px 0;
         width: 100%;
-        max-width: 280px;
+        max-width: 210px;
         height: auto;
       }
     }
@@ -122,8 +131,8 @@ export const WindowContainer = styled.div`
   }
 
   ${ButtonContainer} {
-    background-color: ${cores.amareloQueimado};
-    color: ${cores.salmao};
+    background-color: ${color.whitishYellow};
+    color: ${color.salmon};
     font-size: 14px;
     width: 100%;
     max-width: 304px;

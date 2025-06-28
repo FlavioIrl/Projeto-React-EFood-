@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import lixeira from '../../assets/images/lixeiraDeReciclagem.png'
-import { breakpoints, cores } from '../../styles'
+import { breakpoints, color } from '../../styles'
 import { ButtonContainer } from '../Button/styles'
 
 export const Overlay = styled.div`
@@ -29,7 +29,7 @@ export const CartContainer = styled.div`
 `
 
 export const SideBar = styled.aside`
-  background-color: ${cores.salmao};
+  background-color: ${color.salmon};
   z-index: 1;
   max-width: 360px;
   width: 100%;
@@ -38,14 +38,14 @@ export const SideBar = styled.aside`
   .empty-text {
     font-size: 14px;
     line-height: 22px;
-    color: ${cores.amareloQueimado};
+    color: ${color.whitishYellow};
     text-align: center;
   }
 
   ${ButtonContainer} {
-    background-color: ${cores.amareloQueimado};
+    background-color: ${color.whitishYellow};
     font-size: 14px;
-    color: ${cores.salmao};
+    color: ${color.salmon};
     width: 100%;
     margin: 0;
   }
@@ -60,7 +60,7 @@ export const Prices = styled.div`
   margin-bottom: 16px;
   display: flex;
   justify-content: space-between;
-  color: ${cores.amareloQueimado};
+  color: ${color.whitishYellow};
   font-size: 14px;
   font-weight: bold;
 
@@ -70,7 +70,7 @@ export const Prices = styled.div`
 `
 
 export const CartItems = styled.li`
-  background-color: ${cores.amareloQueimado};
+  background-color: ${color.whitishYellow};
   display: flex;
   width: 100%;
   height: 100px;
@@ -94,7 +94,7 @@ export const CartItems = styled.li`
   }
 
   img {
-    background-color: ${cores.salmao};
+    background-color: ${color.salmon};
     margin: 8px;
     width: 80px;
     height: 80px;

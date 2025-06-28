@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { breakpoints, cores } from '../../styles'
+import { breakpoints, color } from '../../styles'
 import { TagContainer } from '../Tag/styles'
 
 export const Icon = styled.i`
@@ -21,9 +21,9 @@ export const Nota = styled.p`
 
 export const Infos = styled.div`
   padding-top: 10px;
-  border: 1px solid ${cores.salmao};
+  border: 1px solid ${color.salmon};
   border-top: none;
-  background-color: ${cores.branco};
+  background-color: ${color.white};
   padding-bottom: 17px;
 `
 

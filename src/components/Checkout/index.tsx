@@ -9,7 +9,6 @@ import { RootReducer } from '../../store'
 import { formataPreco, getTotalPrice } from '../../utils'
 import { clear } from '../../store/reducers/cart'
 
-
 import Button from '../Button'
 import * as S from './styles'
 import * as Yup from 'yup'
@@ -24,7 +23,6 @@ const Checkout = ({ onClose }: Props) => {
   const [purchase, { isLoading, data, isSuccess }] = usePurchaseMutation()
 
   const dispatch = useDispatch()
-
 
   const navigate = useNavigate()
 

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { ButtonLink } from '../Button/styles'
-import { breakpoints, cores } from '../../styles'
+import { breakpoints, color } from '../../styles'
 
 export const Container = styled.div`
   display: flex;
@@ -24,7 +24,7 @@ export const Container = styled.div`
   ${ButtonLink} {
     background-color: transparent;
     font-size: 18px;
-    color: ${cores.salmao};
+    color: ${color.salmon};
     font-weight: bold;
     padding: 0;
     margin: 0;
@@ -55,7 +55,7 @@ export const ButtonCarrinho = styled.button`
   cursor: pointer;
   background-color: transparent;
   border: none;
-  color: ${cores.salmao};
+  color: ${color.salmon};
 
   @media (max-width: ${breakpoints.tablet}) {
     font-size: 14px;

@@ -1,8 +1,8 @@
 import { RootReducer } from '../../store'
-import { close, remove, CartItem } from '../../store/reducers/cart'
+import { close, remove } from '../../store/reducers/cart'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { SideBar, CartContainer, CartItems, Prices, Overlay } from './styles'
+import * as S from './styles'
 
 import Button from '../Button'
 import { formataPreco, getTotalPrice } from '../../utils'
@@ -24,14 +24,14 @@ const Cart = ({ onContinue }: Props) => {
   }
 
   return (
-    <CartContainer className={isOpen ? 'is-open' : ''}>
-      <Overlay onClick={closeCart} />
-      <SideBar>
+    <S.CartContainer className={isOpen ? 'is-open' : ''}>
+      <S.Overlay onClick={closeCart} />
+      <S.SideBar>
         {items.length > 0 ? (
           <>
             <ul>
               {items.map((item) => (
-                <CartItems key={item.id}>
+                <S.CartItems key={item.id}>
                   <img src={item.foto} />
                   <div>
                     <h2>{item.nome}</h2>
@@ -41,16 +41,16 @@ const Cart = ({ onContinue }: Props) => {
                       type="button"
                     />
                   </div>
-                </CartItems>
+                </S.CartItems>
               ))}
             </ul>
-            <Prices>
+            <S.Prices>
               <p>Valor total</p>
               <p>
                 {formataPreco(getTotalPrice(items))}
                 {''}
               </p>
-            </Prices>
+            </S.Prices>
             <Button
               type="button"
               title={'Clicke e continue o pagamento'}
@@ -70,8 +70,8 @@ const Cart = ({ onContinue }: Props) => {
             </p>
           </>
         )}
-      </SideBar>
-    </CartContainer>
+      </S.SideBar>
+    </S.CartContainer>
   )
 }
 

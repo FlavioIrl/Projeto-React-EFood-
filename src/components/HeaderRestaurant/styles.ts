@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { breakpoints, cores } from '../../styles'
+import { breakpoints, color } from '../../styles'
 
 export const ImageHeader = styled.div`
   width: 100%;
@@ -24,7 +24,7 @@ export const ImageHeader = styled.div`
 export const Title = styled.h3`
   font-size: 32px;
   font-weight: bold;
-  color: ${cores.branco};
+  color: ${color.white};
   margin-top: 15%;
 
   @media (max-width: ${breakpoints.tablet}) {

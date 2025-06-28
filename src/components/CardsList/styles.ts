@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { color } from '../../styles'
 
 export const Container = styled.div`
   display: flex;
-  background-color: ${cores.BrancoAmarelado};
+  background-color: ${color.whitishYellow};
 `
 
 export const List = styled.div`

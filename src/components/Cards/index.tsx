@@ -1,15 +1,5 @@
 import Tag from '../Tag'
-import {
-  Image,
-  Icon,
-  Evaluation,
-  InfoTop,
-  CardsContainer,
-  Infos,
-  Description,
-  Nota,
-  InfoTags
-} from './styles'
+import * as S from './styles'
 
 import Button from '../Button'
 
@@ -40,21 +30,21 @@ const Cards = ({
   }
   console.log('Comprimento descrição:', description.length)
   return (
-    <CardsContainer>
-      <Image src={image} alt={title} />
-      <Infos>
-        <InfoTop>
+    <S.CardsContainer>
+      <S.Image src={image} alt={title} />
+      <S.Infos>
+        <S.InfoTop>
           <h3>{title}</h3>
-          <InfoTags>
+          <S.InfoTags>
             {highlight && <Tag>Destaque da semana</Tag>}
             <Tag>{category}</Tag>
-          </InfoTags>
-          <Evaluation>
-            <Nota>{rating}</Nota>
-            <Icon className="fa-solid fa-star" />
-          </Evaluation>
-        </InfoTop>
-        <Description>{getDescricao(description)}</Description>
+          </S.InfoTags>
+          <S.Evaluation>
+            <S.Nota>{rating}</S.Nota>
+            <S.Icon className="fa-solid fa-star" />
+          </S.Evaluation>
+        </S.InfoTop>
+        <S.Description>{getDescricao(description)}</S.Description>
 
         <Button
           type="link"
@@ -63,8 +53,8 @@ const Cards = ({
         >
           Saiba mais
         </Button>
-      </Infos>
-    </CardsContainer>
+      </S.Infos>
+    </S.CardsContainer>
   )
 }
 
