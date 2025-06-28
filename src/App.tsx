@@ -8,14 +8,18 @@ import { GlobalCss } from './styles'
 import Rotas from './routes'
 import Checkout from './components/Checkout'
 
+import { useState } from 'react'
+
 function App() {
+  const [showCheckout, setShowCheckout] = useState(false)
+
   return (
     <Provider store={store}>
       <BrowserRouter>
         <GlobalCss />
         <Rotas />
-        <Cart />
-        <Checkout />
+        <Cart onContinue={() => setShowCheckout(true)} />
+        {showCheckout && <Checkout onClose={() => setShowCheckout(false)} />}
         <Footer />
       </BrowserRouter>
     </Provider>

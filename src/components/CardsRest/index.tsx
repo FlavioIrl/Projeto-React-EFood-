@@ -29,8 +29,6 @@ const CardsRest = ({ descricao, foto, nome, preco, porcao }: Props) => {
   const addToCart = () => {
     const item = { id: Math.random(), descricao, foto, nome, preco }
 
-    console.log('Adicionando item ao carrinho:', item)
-
     dispatch(add(item))
     dispatch(open())
   }

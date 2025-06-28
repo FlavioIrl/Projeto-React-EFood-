@@ -26,6 +26,10 @@ export const Overlay = styled.div`
   height: 100%;
   background-color: #000;
   opacity: 0.8;
+
+  &.is-open {
+    display: flex;
+  }
 `
 
 export const SideBar = styled.div`

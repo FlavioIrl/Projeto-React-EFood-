@@ -1,19 +1,42 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Navigate, useNavigate } from 'react-router-dom'
+import { useFormik } from 'formik'
+import InputMask from 'react-input-mask'
+
+import { usePurchaseMutation } from '../../services/api'
+import { RootReducer } from '../../store'
+import { formataPreco, getTotalPrice } from '../../utils'
+import { clear } from '../../store/reducers/cart'
+
+
 import Button from '../Button'
 import * as S from './styles'
-import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
-const Checkout = () => {
+type Props = {
+  onClose: () => void
+}
+
+const Checkout = ({ onClose }: Props) => {
   const [isDeliveryStep, setIsDeliveryStep] = useState(true)
+  const { items } = useSelector((state: RootReducer) => state.cart)
+  const [purchase, { isLoading, data, isSuccess }] = usePurchaseMutation()
+
+  const dispatch = useDispatch()
+
+
+  const navigate = useNavigate()
+
+  const totalPrice = getTotalPrice(items)
 
   const form = useFormik({
     initialValues: {
       fullName: '',
-      email: '',
-      cpf: '',
+      address: '',
+      city: '',
       zipCode: '',
-      phoneNumber: '',
+      numberAdress: '',
       addressExtra: '',
       cardOwner: '',
       cardEmail: '',
@@ -27,20 +50,17 @@ const Checkout = () => {
         .min(5, 'O nome precisa ter pelo menos 5 caracteres')
         .required('O campo é obrigatório'),
 
-      email: Yup.string()
-        .email('E-mail inválido')
-        .required('O campo é obrigatório'),
-
-      cpf: Yup.string()
-        .min(14, 'O campo precisa ter 14 caracteres')
-        .max(14, 'O campo precisa ter 14 caracteres')
-        .required('O campo é obrigatório'),
-
-      zipCode: Yup.string()
+      address: Yup.string()
         .min(5, 'O nome precisa ter pelo menos 5 caracteres')
         .required('O campo é obrigatório'),
 
-      phoneNumber: Yup.string().required('O campo é obrigatório'),
+      city: Yup.string()
+        .min(5, 'O nome precisa ter pelo menos 5 caracteres')
+        .required('O campo é obrigatório'),
+
+      zipCode: Yup.string().required('O campo é obrigatório'),
+
+      numberAdress: Yup.string().required('O campo é obrigatório'),
       addressExtra: Yup.string().max(
         100,
         'O complemento não pode ter mais que 100 caracteres'
@@ -65,7 +85,33 @@ const Checkout = () => {
       )
     }),
     onSubmit: (values) => {
-      console.log(values)
+      purchase({
+        delivery: {
+          receiver: values.fullName,
+          address: {
+            description: values.address,
+            city: values.city,
+            zipCode: values.zipCode,
+            number: Number(values.numberAdress),
+            complement: values.addressExtra
+          }
+        },
+        payment: {
+          card: {
+            name: values.cardOwner,
+            number: values.cardNumber,
+            code: values.cardCode,
+            expires: {
+              month: Number(values.expiresMonth),
+              year: Number(values.expiresYear)
+            }
+          }
+        },
+        products: items.map((item) => ({
+          id: item.id,
+          price: item.preco as number
+        }))
+      })
     }
   })
 
@@ -77,11 +123,52 @@ const Checkout = () => {
     return ''
   }
 
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(clear())
+    }
+  }, [isSuccess, dispatch])
+
+  if (items.length === 0 && !isSuccess) {
+    return <Navigate to="/" />
+  }
+
   return (
     <form onSubmit={form.handleSubmit}>
       <S.CheckoutContainer>
-        <S.Overlay />
-        {isDeliveryStep ? (
+        {isSuccess && data ? (
+          <S.SideBar>
+            <h3>Pedido realizado - {data.orderId}</h3>
+            <p className="marginTop">
+              Estamos felizes em informar que seu pedido já está em processo de
+              preparação e, em breve, será entregue no endereço fornecido.
+            </p>
+
+            <p className="marginTop">
+              Gostaríamos de ressaltar que nossos entregadores não estão
+              autorizados a realizar cobranças extras.
+            </p>
+            <p className="marginTop">
+              Lembre-se da importância de higienizar as mãos após o recebimento
+              do pedido, garantindo assim sua segurança e bem-estar durante a
+              refeição.
+            </p>
+            <p className="marginBottom marginTop">
+              Esperamos que desfrute de uma deliciosa e agradável experiência
+              gastronômica. Bom apetite!
+            </p>
+            <Button
+              type="button"
+              title="Finalizar o pagamento"
+              onClick={() => {
+                onClose()
+                navigate('/')
+              }}
+            >
+              Concluir
+            </Button>
+          </S.SideBar>
+        ) : isDeliveryStep ? (
           <S.SideBar>
             <h3>Entrega</h3>
             <S.Card>
@@ -101,41 +188,42 @@ const Checkout = () => {
               </S.InputGroup>
 
               <S.InputGroup>
-                <label htmlFor="email">Email</label>
+                <label htmlFor="address">Endereço</label>
                 <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={form.values.email}
+                  type="text"
+                  id="address"
+                  name="address"
+                  value={form.values.address}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                 />
-                <small>{getErrorMessage('email', form.errors.email)}</small>
+                <small>{getErrorMessage('address', form.errors.address)}</small>
               </S.InputGroup>
 
               <S.InputGroup>
-                <label htmlFor="cpf">CPF</label>
+                <label htmlFor="city">Cidade</label>
                 <input
                   type="text"
-                  id="cpf"
-                  name="cpf"
-                  value={form.values.cpf}
+                  id="city"
+                  name="city"
+                  value={form.values.city}
                   onChange={form.handleChange}
                   onBlur={form.handleBlur}
                 />
-                <small>{getErrorMessage('cpf', form.errors.cpf)}</small>
+                <small>{getErrorMessage('city', form.errors.city)}</small>
               </S.InputGroup>
 
               <S.Local>
                 <S.InputGroup>
                   <label htmlFor="zipCode">CEP</label>
-                  <input
+                  <InputMask
                     type="text"
                     id="zipCode"
                     name="zipCode"
                     value={form.values.zipCode}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    mask="99999-999"
                   />
                   <small>
                     {getErrorMessage('zipCode', form.errors.zipCode)}
@@ -143,23 +231,23 @@ const Checkout = () => {
                 </S.InputGroup>
 
                 <S.InputGroup>
-                  <label htmlFor="phoneNumber">Telefone</label>
+                  <label htmlFor="numberAdress">Número</label>
                   <input
                     type="text"
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    value={form.values.phoneNumber}
+                    id="numberAdress"
+                    name="numberAdress"
+                    value={form.values.numberAdress}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
                   />
                   <small>
-                    {getErrorMessage('phoneNumber', form.errors.phoneNumber)}
+                    {getErrorMessage('numberAdress', form.errors.numberAdress)}
                   </small>
                 </S.InputGroup>
               </S.Local>
 
               <S.InputGroup>
-                <label htmlFor="addressExtra">Complemento</label>
+                <label htmlFor="addressExtra">Complemento(opcional)</label>
                 <input
                   type="text"
                   id="addressExtra"
@@ -178,14 +266,20 @@ const Checkout = () => {
               type="button"
               title="Ir para pagamento"
               onClick={() => {
-                if (form.isValid) {
-                  setIsDeliveryStep(false)
-                } else {
-                  // Se o formulário não for válido, pode exibir uma mensagem de erro ou apenas evitar a navegação.
-                  console.log('Por favor, corrija os erros antes de continuar')
-                }
+                form.validateForm().then((errors) => {
+                  if (Object.keys(errors).length === 0) {
+                    setIsDeliveryStep(false)
+                  } else {
+                    form.setTouched({
+                      fullName: true,
+                      address: true,
+                      city: true,
+                      zipCode: true,
+                      numberAdress: true
+                    })
+                  }
+                })
               }}
-              disabled={!form.isValid} // Desabilita o botão caso o formulário não seja válido
             >
               Continuar com pagamento
             </Button>
@@ -193,14 +287,14 @@ const Checkout = () => {
             <Button
               type="button"
               title="Voltar para o carrinho"
-              onClick={() => {}}
+              onClick={onClose}
             >
               Voltar para o carrinho
             </Button>
           </S.SideBar>
         ) : (
           <S.SideBar>
-            <h3>Pagamento - Valor a pagar</h3>
+            <h3>Pagamento - Valor a pagar {formataPreco(totalPrice)}</h3>
             <S.Card>
               <S.InputGroup>
                 <label htmlFor="cardOwner">Nome do titular</label>
@@ -235,13 +329,14 @@ const Checkout = () => {
               <S.InputGroupPag>
                 <S.InputGroup>
                   <label htmlFor="cardNumber">Número do cartão</label>
-                  <input
+                  <InputMask
                     type="text"
                     id="cardNumber"
                     name="cardNumber"
                     value={form.values.cardNumber}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    mask="9999 9999 9999 9999"
                   />
                   <small>
                     {getErrorMessage('cardNumber', form.errors.cardNumber)}
@@ -250,13 +345,14 @@ const Checkout = () => {
 
                 <S.InputGroup>
                   <label htmlFor="cardCode">CVV</label>
-                  <input
+                  <InputMask
                     type="text"
                     id="cardCode"
                     name="cardCode"
                     value={form.values.cardCode}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    mask="999"
                   />
                   <small>
                     {getErrorMessage('cardCode', form.errors.cardCode)}
@@ -267,13 +363,14 @@ const Checkout = () => {
               <S.Local>
                 <S.InputGroup>
                   <label htmlFor="expiresMonth">Mês</label>
-                  <input
+                  <InputMask
                     type="text"
                     id="expiresMonth"
                     name="expiresMonth"
                     value={form.values.expiresMonth}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    mask="99"
                   />
                   <small>
                     {getErrorMessage('expiresMonth', form.errors.expiresMonth)}
@@ -282,13 +379,14 @@ const Checkout = () => {
 
                 <S.InputGroup>
                   <label htmlFor="expiresYear">Ano</label>
-                  <input
+                  <InputMask
                     type="text"
                     id="expiresYear"
                     name="expiresYear"
                     value={form.values.expiresYear}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
+                    mask="99"
                   />
                   <small>
                     {getErrorMessage('expiresYear', form.errors.expiresYear)}
@@ -301,8 +399,9 @@ const Checkout = () => {
               title="Finalizar compra"
               type="button"
               onClick={form.handleSubmit}
+              disabled={isLoading}
             >
-              Finalizar compra
+              {isLoading ? 'Finalizando compra...' : 'Finalizar compra'}
             </Button>
 
             <Button
@@ -314,33 +413,6 @@ const Checkout = () => {
             </Button>
           </S.SideBar>
         )}
-
-        {/* <S.SideBar>
-          <h3>Pedido realizado - Id</h3>
-          <p className='marginTop'>
-            Estamos felizes em informar que seu pedido já está em processo de
-            preparação e, em breve, será entregue no endereço fornecido.
-          </p>
-          <br />
-          
-          <p>
-            Gostaríamos de ressaltar que nossos entregadores não estão autorizados
-            a realizar cobranças extras.
-          </p>
-          <br />
-          <p>
-            Lembre-se da importância de higienizar as mãos após o recebimento do
-            pedido, garantindo assim sua segurança e bem-estar durante a refeição.
-          </p>
-          <br />
-          <p className='marginBottom'>
-            Esperamos que desfrute de uma deliciosa e agradável experiência
-            gastronômica. Bom apetite!
-          </p>
-          <Button type="button" title="Finalizar o pagamento" onClick={() => {}}>
-            Concluir
-          </Button>
-        </S.SideBar> */}
       </S.CheckoutContainer>
     </form>
   )

@@ -35,6 +35,13 @@ export const SideBar = styled.aside`
   width: 100%;
   padding: 30px 8px 0 8px;
 
+  .empty-text {
+    font-size: 14px;
+    line-height: 22px;
+    color: ${cores.amareloQueimado};
+    text-align: center;
+  }
+
   ${ButtonContainer} {
     background-color: ${cores.amareloQueimado};
     font-size: 14px;
